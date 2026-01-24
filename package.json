@@ -10,8 +10,6 @@
   "license": "Apache-2.0",
   "dependencies": {
     "body-parser": "^1.18.1",
-    "redis": "^2.8.0",
-    "lodash": "4.17.15",
     "express": "^4.15.4",
     "mongodb": "^4.7.0",
     "pino": "^5.10.8",
