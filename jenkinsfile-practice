@@ -31,5 +31,10 @@ pipeline {
                 """
             }
         }
+        stage ('Build the image'){
+              sh """ 
+                    docker build -t catalogue:${appVersion} . 
+                """
+        }
     }
 }
