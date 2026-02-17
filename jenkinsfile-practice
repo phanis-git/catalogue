@@ -33,9 +33,15 @@ pipeline {
         }
         stage ('Build the image'){
             steps {
-                sh """ 
-                    docker build -t catalogue:${appVersion} . 
-                """
+                // sh """ 
+                //     docker build -t catalogue:${appVersion} . 
+                // """
+                withAWS(region:'us-east-1',credentials:'nameOfSystemCredentials') {
+
+                        aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin ${ACC_ID}.dkr.ecr.us-east-1.amazonaws.com
+                        docker build -t ${project}/${component}:${appVersion} ${ACC_ID}.dkr.ecr.us-east-1.amazonaws.com/${project}/${component}:${appVersion} .
+                        docker push ${ACC_ID}.dkr.ecr.us-east-1.amazonaws.com/${project}/${component}:${appVersion}
+                }
             }
              
         }
