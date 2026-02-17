@@ -6,7 +6,7 @@ pipeline {
         appVersion = ""
         project = "roboshop"
         component = "catalogue"
-        ACC_ID = "658038453909"
+        ACC_ID = "438152482096"
     }
     stages {
         stage('Read Version'){

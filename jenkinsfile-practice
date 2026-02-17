@@ -1,0 +1,35 @@
+pipeline {
+    agent {
+        label 'AGENT-1'
+    }
+    environment {
+        appVersion = ""
+        project = "roboshop"
+        component = "catalogue"
+        ACC_ID = "438152482096"
+    }
+    stages {
+        stage ('Read Version') {
+            steps {
+                script {
+                    def packageJson = readJSON file: 'package.json'
+                    appVersion = packageJson.version
+                }
+            }
+        }
+        stage('Install Dependencies'){
+            steps {
+                sh """ 
+                    npm install
+                """
+            }
+        }
+        stage('Unit Testing'){
+            steps {
+                sh """ 
+                    npm test
+                """
+            }
+        }
+    }
+}
